@@ -1,0 +1,154 @@
+################################################
+#                                              #
+#     FILE UNDER ANSIBLE CONFIG MANAGEMENT     #
+#                                              #
+#              keep hands away                 #
+#                                              #
+#    ansible-proxysql/templates/proxysql.j2    #
+#                                              #
+################################################
+
+#file proxysql.cfg
+
+# This config file is parsed using libconfig , and its grammar is described in:
+# http://www.hyperrealm.com/libconfig/libconfig_manual.html#Configuration-File-Grammar
+# Grammar is also copied at the end of this file
+
+datadir="/var/lib/proxysql"
+
+admin_variables=
+{
+  admin_credentials="{{ proxysql_admin_user }}:{{ proxysql_admin_password }}"
+  mysql_ifaces="{{ proxysql_admin_interface }}:{{ proxysql_admin_port }};/tmp/proxysql_admin.sock"
+# refresh_interval=2000
+# debug=true
+}
+
+mysql_variables=
+{
+  threads=4
+  max_connections=2048
+  default_query_delay=0
+  default_query_timeout=36000000
+  have_compress=true
+  poll_timeout=2000
+  interfaces="{{ proxysql_mysql_interface }}:{{ proxysql_mysql_port }};/tmp/proxysql.sock"
+  default_schema="information_schema"
+  stacksize=1048576
+  server_version="5.5.30"
+  connect_timeout_server=3000
+  monitor_history=600000
+  monitor_connect_interval=60000
+  monitor_ping_interval=10000
+  monitor_read_only_interval=1500
+  monitor_read_only_timeout=500
+# ping_interval_server=120000
+  ping_timeout_server=500
+  commands_stats=true
+  sessions_sort=true
+  connect_retries_on_failure=10
+}
+
+
+# Defines all the MySQL servers
+
+mysql_servers =
+(
+{% for srv in proxysql_mysql_servers %}
+  {
+    address="{{ srv.address }}",
+    port={{ srv.port }},
+    hostgroup={{ srv.hostgroup }}
+  }{% if not loop.last %},{% endif %}
+{% endfor %}
+)
+
+
+# Defines all the MySQL users
+
+mysql_users:
+(
+{% for usr in proxysql_mysql_users %}
+  {
+    username="{{ usr.username }}",
+    password="{{ usr.password }}";
+    default_hostgroup="{{ usr.default_hostgroup | default(0) }}"
+  }{% if not loop.last %},{% endif %}
+{% endfor %}
+)
+
+# Defines MySQL Query Rules
+
+mysql_query_rules:
+(
+{% for usr in proxysql_mysql_users %}
+  {
+    rule_id={{ loop.index }}
+    match_pattern="{{ rule.match_pattern }}",
+    destination_hostgroup={{ rule.destination_hostgroup | default(0) }}
+  }
+{%   if not loop.last %},
+
+{%   endif %}
+{% endfor %}
+)
+
+scheduler=
+(
+#  {
+#    id=1
+#    active=0
+#    interval_ms=10000
+#    filename="/var/lib/proxysql/proxysql_galera_checker.sh"
+#    arg1="0"
+#    arg2="0"
+#    arg3="0"
+#    arg4="1"
+#    arg5="/var/lib/proxysql/proxysql_galera_checker.log"
+#  }
+)
+
+
+mysql_replication_hostgroups=
+(
+#        {
+#                writer_hostgroup=30
+#                reader_hostgroup=40
+#                comment="test repl 1"
+#       },
+#       {
+#                writer_hostgroup=50
+#                reader_hostgroup=60
+#                comment="test repl 2"
+#        }
+)
+
+
+
+
+# http://www.hyperrealm.com/libconfig/libconfig_manual.html#Configuration-File-Grammar
+#
+# Below is the BNF grammar for configuration files. Comments and include directives are not part of the grammar, so they are not included here. 
+#
+# configuration = setting-list | empty
+#
+# setting-list = setting | setting-list setting
+#     
+# setting = name (":" | "=") value (";" | "," | empty)
+#     
+# value = scalar-value | array | list | group
+#     
+# value-list = value | value-list "," value
+#     
+# scalar-value = boolean | integer | integer64 | hex | hex64 | float
+#                | string
+#     
+# scalar-value-list = scalar-value | scalar-value-list "," scalar-value
+#     
+# array = "[" (scalar-value-list | empty) "]"
+#     
+# list = "(" (value-list | empty) ")"
+#     
+# group = "{" (setting-list | empty) "}"
+#     
+# empty =

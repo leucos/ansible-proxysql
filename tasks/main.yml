@@ -1,0 +1,4 @@
+- include: proxysql.yml
+  tags:
+    - proxysql
+

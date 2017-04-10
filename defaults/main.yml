@@ -1,0 +1,43 @@
+proxysql_version: 1.3.5
+
+proxysql_admin_user: admin
+proxysql_admin_password: admin
+
+proxysql_admin_interface: 127.0.0.1
+proxysql_admin_port: 6032
+
+# Force database wipe
+proxysql_initial: False
+
+proxysql_mysql_interface: 127.0.0.1
+proxysql_mysql_port: 6033
+
+# Query rules
+# Format:
+# proxysql_mysql_query_rules:
+#   - match_pattern: "^SELECT .* FOR UPDATE$"
+#     destination_hostgroup: 0
+#   - match_pattern: "^SELECT"
+#     destination_hostgroup: 1
+#
+proxysql_mysql_query_rules: []
+
+# Servers
+# Format:
+# proxysql_mysql_servers:
+#   - address: 127.0.0.1
+#     port: 3306
+#     hostgroup: 0
+#   - address: 1.2.3.4
+#     port: 3306
+#     hostgroup: 1
+proxysql_mysql_servers: []
+
+# Users
+# Format:
+# proxysql_mysql_users:
+#   - username: foo
+#     password: bar
+#     default_hostgroup: 0  # default: 0
+proxysql_mysql_users: []
+

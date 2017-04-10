@@ -1,0 +1,19 @@
+- name: Restart proxysql normal
+  service:
+    name: proxysql
+    state: restarted
+  when: not proxysql_initial
+
+- name: Restart proxysql initial
+  command: service proxysql initial
+  when: proxysql_initial
+
+- name: Restart proxysql
+  debug:
+    msg: "Fan-out handler"
+  changed_when: true
+  notify:
+    - Restart proxysql normal
+    - Restart proxysql initial
+
+

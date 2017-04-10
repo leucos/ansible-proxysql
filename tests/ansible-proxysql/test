@@ -1,0 +1,21 @@
+#!/bin/bash
+# -*- bash -*-
+
+# This gives you access to the custom DSL
+. "${ROLESPEC_LIB}/main"
+. "${ROLESPEC_TEST}/../defaults.conf"
+
+# Everything past this point is the custom DSL which is optional
+
+# Install a specific version of Ansible, you can
+# omit the version to install devel (latest unstable)
+install_ansible ${test_ansible_version}
+
+echo "##### RUN TEST"
+
+# Check that the playbook runs
+assert_playbook_runs
+assert_playbook_idempotent
+assert_tcp localhost 6032
+assert_tcp localhost 6033
+
