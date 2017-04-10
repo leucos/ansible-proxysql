@@ -4,7 +4,7 @@ This role will install proxysql on Ubuntu Xenial (16.04) from [sysown release](h
 
 ## Requirements
 
-None
+Tested on 2.2.1.0 but should work on Ansible 1.9+.
 
 ## Role Handlers
 
