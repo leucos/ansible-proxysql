@@ -1,0 +1,16 @@
+---
+galaxy_info:
+  author: Michel Blanc
+  description: ProxySQL role
+  company: devopsworks
+  license: MIT
+  min_ansible_version: 1.8
+
+  platforms:
+  - name: Ubuntu
+    versions:
+    - Xenial
+  categories:
+    - databases
+
+dependencies: []
