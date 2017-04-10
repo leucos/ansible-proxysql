@@ -45,7 +45,7 @@ None
 - src: git+ssh://git@github.com/leucos/ansible-proxysql.git
   version: origin/master
 ```
-_Use a fixed tag instead og origin/master if possible_
+_Use a fixed tag instead of origin/master if possible_
 
 ### Playbook
 
