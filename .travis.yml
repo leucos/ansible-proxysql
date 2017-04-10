@@ -1,0 +1,10 @@
+language: python
+python: '2.7'
+sudo: required
+virtualenv:
+  system_site_packages: true
+before_install: true
+install: true
+script:
+- git clone --depth 1 https://github.com/nickjj/rolespec
+- cd rolespec ; bin/rolespec -r https://github.com/erasme/ansible-roles-specs.git
