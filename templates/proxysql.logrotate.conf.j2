@@ -1,0 +1,21 @@
+##########################################################
+#                                                        #
+#          FILE UNDER ANSIBLE CONFIG MANAGEMENT          #
+#                                                        #
+#                   keep hands away                      #
+#                                                        #
+#  ansible-proxysql/templates/proxysql.logrotate.conf.j2 #
+#                                                        #
+##########################################################
+
+/var/log/proxysql/*.log {
+  daily
+  dateext
+  dateyesterday
+  missingok
+  rotate 366
+  compress
+  delaycompress
+  notifempty
+  create 0640 root root
+}

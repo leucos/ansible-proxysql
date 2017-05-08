@@ -19,3 +19,14 @@
     mode: 0644
     backup: yes
   notify: Restart proxysql
+
+- name: Creates log dir
+  file:
+    path: /var/log/proxysql/
+    state: directory
+    
+- name: Adds logrotate
+  template:
+    src: proxysql.logrotate.conf.j2
+    dest: /etc/logrotate.d/proxysql
+    mode: 0644
