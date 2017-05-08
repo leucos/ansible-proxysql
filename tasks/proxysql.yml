@@ -7,7 +7,7 @@
   apt:
     deb: /tmp/proxysql_{{ proxysql_version }}-ubuntu16_amd64.deb
 
-- name: Installs mysql-commong
+- name: Installs mysql-common
   apt:
     pkg: mysql-common
     state: present
@@ -24,9 +24,10 @@
   file:
     path: /var/log/proxysql/
     state: directory
-    
+
 - name: Adds logrotate
   template:
     src: proxysql.logrotate.conf.j2
     dest: /etc/logrotate.d/proxysql
     mode: 0644
+

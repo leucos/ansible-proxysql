@@ -4,7 +4,11 @@ sudo: required
 virtualenv:
   system_site_packages: true
 before_install: true
-install: true
+install:
+  - sudo pip install ansible==2.3.0.0
+  - sudo pip install ansible-lint
+
 script:
-- git clone --depth 1 https://github.com/nickjj/rolespec
-- cd rolespec ; bin/rolespec -r https://github.com/erasme/ansible-roles-specs.git
+  - ansible-lint .
+  - git clone --depth 1 https://github.com/nickjj/rolespec
+  - cd rolespec ; bin/rolespec -r https://github.com/erasme/ansible-roles-specs.git
