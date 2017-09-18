@@ -81,7 +81,7 @@ mysql_users:
 
 mysql_query_rules:
 (
-{% for usr in proxysql_mysql_users %}
+{% for rule in proxysql_mysql_query_rules %}
   {
     rule_id={{ loop.index }}
     match_pattern="{{ rule.match_pattern }}",
