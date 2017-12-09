@@ -44,11 +44,11 @@ mysql_servers from the group name.
 However, in this case, be sure to set the following variables for _each
 server_ in the group:
 
-| Name                     | Default | Type   | Description                                  |
-| -----                    | ------- | ------ | -------------------------------------------- |
-| proxysql_mysql_interface | false   | String | Interface **name** MySQL server listens on   |
-| proxysql_mysql_port      | 3306    | String | Port MySQL listens on                        |
-| proxysql_hostgroup       | false   | Number | Hostgroup this MySQL server belongs to       |
+| Name                              | Default | Type   | Description                                         |
+| -----                             | ------- | ------ | --------------------------------------------        |
+| proxysql_upstream_mysql_interface | false   | String | Interface **name** upstream MySQL server listens on |
+| proxysql_upstream_mysql_port      | 3306    | String | Port iupstream MySQL listens on                     |
+| proxysql_hostgroup                | false   | Number | Hostgroup this MySQL server belongs to              |
 
 Note that you can not use both `proxy_mysql_servers_group` and
 `proxy_mysql_servers` at the same time !
