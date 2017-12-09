@@ -34,7 +34,7 @@ proxysql_servers =
 {% for host in groups[proxysql_cluster_servers_group] %}
     {
         hostname="{{ hostvars[host]['proxysql_admin_interface'] }}"
-        port={{ hostvars[host]['proxysql_admin_port'] }}
+        port={{ hostvars[host]['proxysql_admin_port'] | default(proxysql_admin_port) }}
         comment="{{ host }}"
     }{% if not loop.last %},{% endif %}
 {% endfor %}

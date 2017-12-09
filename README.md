@@ -55,10 +55,11 @@ Note that you can not use both `proxy_mysql_servers_group` and
 
 When using cluster mode, the following variables must be set:
 
-| Name                      | Default | Type   | Description                                  |
-| -----                     | ------- | ------ | -------------------------------------------- |
-| proxysql_cluster_name     | false   | String | ProxySQL name                                |
-| proxysql_cluster_password | false   | String | ProxySQL password for cluster communications |
+| Name                           | Default | Type   | Description                                       |
+| -----                          | ------- | ------ | --------------------------------------------      |
+| proxysql_cluster_name          | false   | String | ProxySQL name                                     |
+| proxysql_cluster_password      | false   | String | ProxySQL password for cluster communications      |
+| proxysql_cluster_servers_group | false   | String | Ansible group containing ProxySQL cluster members |
 
 ## Example
 
