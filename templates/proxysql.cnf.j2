@@ -22,7 +22,25 @@ admin_variables=
   mysql_ifaces="{{ proxysql_admin_interface }}:{{ proxysql_admin_port }};/tmp/proxysql_admin.sock"
 # refresh_interval=2000
 # debug=true
+{% if proxysql_cluster_name %}
+  cluster_username="{{ proxysql_cluster_name }}"
+  cluster_password="{{ proxysql_cluster_password }}"
+{% endif %}
 }
+
+{% if proxysql_cluster_name and proxysql_version | version_compare('1.4.2', '>=') %}
+proxysql_servers =
+(
+{% for host in group[proxysql_servers_group] %}
+    {
+        hostname="{{ hostvars[host]['proxysql_admin_interface'] }}"
+        port={{ hostvars[host]['proxysql_admin_port'] }}
+        comment="{{ host }}"
+    }{% if not loop.last %},{% endif %}
+{% endfor %}
+)
+
+{% endif %}
 
 mysql_variables=
 {
