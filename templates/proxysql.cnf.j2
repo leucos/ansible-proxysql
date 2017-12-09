@@ -79,6 +79,15 @@ mysql_servers =
     hostgroup={{ srv.hostgroup }}
   }{% if not loop.last %},{% endif %}
 {% endfor %}
+{% if proxysql_mysql_servers_group is defined %}
+{%   for srv in groups[proxysql_mysql_servers_group] %}
+  {
+    address="{{ hostvars[srv].proxysql_mysql_interface }}",
+    port={{ hostvars[srv].proxysql_mysql_port | default(3306) }},
+    hostgroup={{ hostvars[srv].proxysql_hostgroup }}
+  }{% if not loop.last %},{% endif %}
+{%   endfor %}
+{% endif %}
 )
 
 

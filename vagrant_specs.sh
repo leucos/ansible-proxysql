@@ -16,6 +16,7 @@
 if [ "x$1" == "x--install" ]; then
   mv ~ubuntu/specs /usr/local/bin/specs
   chmod 755 /usr/local/bin/specs
+  sudo apt-get update
   sudo apt-get install -qqy git make python
   su ubuntu -c 'git clone --depth 1 https://github.com/nickjj/rolespec'
   cd ~ubuntu/rolespec && make install

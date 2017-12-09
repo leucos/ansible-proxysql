@@ -1,4 +1,4 @@
 - name: Checking that both or none proxysql_cluster_name & proxysql_cluster_password are defined
   fail: msg="proxysql_cluster_name & proxysql_cluster_password must be both set or false"
-  when: proxysql_cluster_name != proxysql_cluster_password and (proxysql_cluster_password is false or proxysql_cluster_name is false)
+  when: proxysql_cluster_name != proxysql_cluster_password and (proxysql_cluster_password == False or proxysql_cluster_name == False)
 

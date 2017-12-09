@@ -37,6 +37,29 @@ Tested on 2.2.1.0 but should work on Ansible 1.9+.
 | proxysql_mysql_servers     | []        | Array  | Configuration-file servers                                        |
 | proxysql_mysql_users       | []        | Array  | Configuration-file users                                          |
 
+If you don't want to list `proxy_mysql_servers` in variables, you can
+set `proxy_mysql_servers_group` instead. The rolle will populate
+mysql_servers from the group name.
+
+However, in this case, be sure to set the following variables for _each
+server_ in the group:
+
+| Name                     | Default | Type   | Description                                  |
+| -----                    | ------- | ------ | -------------------------------------------- |
+| proxysql_mysql_interface | false   | String | Interface **name** MySQL server listens on   |
+| proxysql_mysql_port      | 3306    | String | Port MySQL listens on                        |
+| proxysql_hostgroup       | false   | Number | Hostgroup this MySQL server belongs to       |
+
+Note that you can not use both `proxy_mysql_servers_group` and
+`proxy_mysql_servers` at the same time !
+
+When using cluster mode, the following variables must be set:
+
+| Name                      | Default | Type   | Description                                  |
+| -----                     | ------- | ------ | -------------------------------------------- |
+| proxysql_cluster_name     | false   | String | ProxySQL name                                |
+| proxysql_cluster_password | false   | String | ProxySQL password for cluster communications |
+
 ## Example
 
 ### Requirements
