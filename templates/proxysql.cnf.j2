@@ -31,7 +31,7 @@ admin_variables=
 {% if proxysql_cluster_name and proxysql_version | version_compare('1.4.2', '>=') %}
 proxysql_servers =
 (
-{% for host in groups[proxysql_servers_group] %}
+{% for host in groups[proxysql_cluster_servers_group] %}
     {
         hostname="{{ hostvars[host]['proxysql_admin_interface'] }}"
         port={{ hostvars[host]['proxysql_admin_port'] }}
