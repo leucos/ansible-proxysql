@@ -3,17 +3,17 @@
     url: https://github.com/sysown/proxysql/releases/download/v{{ proxysql_version }}/proxysql_{{ proxysql_version }}-ubuntu16_amd64.deb
     dest: /tmp/proxysql_{{ proxysql_version }}-ubuntu16_amd64.deb
 
-- name: Installs mysql client
-  apt:
-    pkg: mysql-client
-
 - name: Installs proxysql
   apt:
     deb: /tmp/proxysql_{{ proxysql_version }}-ubuntu16_amd64.deb
-- name: Installs mysql-common
+
+- name: Installs mysql-common & client
   apt:
-    pkg: mysql-common
+    pkg: "{{ item }}"
     state: present
+  with_items:
+    - mysql-common
+    - mysql-client
 
 - name: Configures proxysql
   template:
