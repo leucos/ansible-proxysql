@@ -1,5 +1,3 @@
-proxysql_version: 1.4.3
-
 proxysql_admin_user: admin
 proxysql_admin_password: admin
 
