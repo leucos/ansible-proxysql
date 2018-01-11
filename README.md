@@ -25,7 +25,6 @@ Tested on 2.2.1.0 but should work on Ansible 1.9+.
 
 | Name                       | Default   | Type   | Description                                                       |
 | -----                      | -------   | ------ | -----------                                                       |
-| proxysql_version           | 1.5.3     | String | ProxySQL version to install                                       |
 | proxysql_admin_user        | admin     | String | Username for ProxySQL admin                                       |
 | proxysql_admin_password    | admin     | String | Password for the above user                                       |
 | proxysql_admin_interface   | 127.0.0.1 | String | Bind address for admin interface                                  |
