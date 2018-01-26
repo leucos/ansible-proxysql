@@ -99,7 +99,7 @@ mysql_users:
 {% for usr in proxysql_mysql_users %}
   {
     username="{{ usr.username }}",
-    password="{{ usr.password }}";
+    password="{{ usr.password }}",
     default_hostgroup="{{ usr.default_hostgroup | default(0) }}"
   }{% if not loop.last %},{% endif %}
 {% endfor %}
