@@ -1,6 +1,10 @@
 # ProxySQL Ansible role
 
-This role will install proxysql on Ubuntu Xenial (16.04) from [sysown release](https://github.com/sysown/proxysql/releases).
+[![Build Status](https://travis-ci.org/leucos/ansible-proxysql.svg?branch=master)](https://travis-ci.org/leucos/ansible-proxysql)
+
+This role will install proxysql on Ubuntu Xenial (16.04) & Bionic
+(18.04) from [sysown
+release](https://github.com/sysown/proxysql/releases).
 
 ## Requirements
 
