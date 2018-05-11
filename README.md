@@ -8,7 +8,7 @@ release](https://github.com/sysown/proxysql/releases).
 
 ## Requirements
 
-Tested on 2.2.1.0 but should work on Ansible 1.9+.
+Tested on 2.5.0. Should work on 2.3+
 
 ## Role Handlers
 
