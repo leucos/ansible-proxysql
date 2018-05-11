@@ -1,24 +1,26 @@
-- name: Adds percona key
+---
+- name: Adds repository key
   apt_key:
-    keyserver: keys.gnupg.net
-    id: "{{ item }}"
+    url: http://repo.proxysql.com/ProxySQL/repo_pub_key
     state: present
-  with_items:
-    - E1E2CD202D607DAF
-    - 1C4CBDCDCD2EFD2A
-    - 9334A25F8507EFA5
-    - 9E003FA64CAC6D72
-  tags: ["pxc:keys"]
 
 - name: Adds percona repositories
   apt_repository:
-    repo: 'deb http://repo.percona.com/apt {{ ansible_distribution_release }} main'
+    repo: 'deb http://repo.proxysql.com/ProxySQL/proxysql-1.4.x/{{ ansible_distribution_release }} ./'
     state: present
 
-- name: Installs proxysql
+- name: Installs proxysql & python-mysqldb
   apt:
-    pkg: proxysql
+    pkg: "{{ item }}"
     state: present
+  with_items:
+    - proxysql
+    - python-mysqldb
+
+- name: Holds proxysql version
+  dpkg_selections:
+    name: proxysql
+    selection: hold
 
 - name: Installs mysql-common & client
   apt:
@@ -33,8 +35,14 @@
     src: proxysql.cnf.j2
     dest: /etc/proxysql.cnf
     mode: 0644
-    backup: yes
-  notify: Restart proxysql
+    backup: true
+  notify:
+    - Load config from file to memory
+
+- name: Ensures proxysql is started
+  service:
+    name: proxysql
+    state: started
 
 - name: Creates log dir
   file:
@@ -46,4 +54,3 @@
     src: proxysql.logrotate.conf.j2
     dest: /etc/logrotate.d/proxysql
     mode: 0644
-

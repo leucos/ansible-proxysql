@@ -46,7 +46,7 @@ server_ in the group:
 | Name                              | Default | Type   | Description                                         |
 | -----                             | ------- | ------ | --------------------------------------------        |
 | proxysql_upstream_mysql_interface | false   | String | Interface **name** upstream MySQL server listens on |
-| proxysql_upstream_mysql_port      | 3306    | String | Port iupstream MySQL listens on                     |
+| proxysql_upstream_mysql_port      | 3306    | String | Port upstream MySQL listens on                     |
 | proxysql_hostgroup                | false   | Number | Hostgroup this MySQL server belongs to              |
 
 Note that you can not use both `proxy_mysql_servers_group` and

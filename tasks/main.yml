@@ -1,3 +1,4 @@
+---
 - include: check_vars.yml
   tags:
     - proxysql
@@ -6,4 +7,3 @@
 - include: proxysql.yml
   tags:
     - proxysql
-

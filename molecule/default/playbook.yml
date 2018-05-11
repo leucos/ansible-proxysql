@@ -1,0 +1,8 @@
+---
+- name: Converge
+  hosts: all
+  #  vars:
+  #    proxysql_admin_port: 6030
+  #    proxysql_mysql_port: 6031
+  roles:
+    - role: ansible-proxysql

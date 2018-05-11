@@ -1,3 +1,4 @@
+---
 proxysql_admin_user: admin
 proxysql_admin_password: admin
 
@@ -5,7 +6,7 @@ proxysql_admin_interface: 127.0.0.1
 proxysql_admin_port: 6032
 
 # Force database wipe
-proxysql_initial: False
+proxysql_initial: false
 
 proxysql_mysql_interface: 127.0.0.1
 proxysql_mysql_port: 6033
@@ -40,5 +41,7 @@ proxysql_mysql_servers: []
 proxysql_mysql_users: []
 
 
-proxysql_cluster_name: False
-proxysql_cluster_password: False
+proxysql_cluster_name: false
+proxysql_cluster_password: false
+
+proxysql_mysql_server_version: 5.5.30

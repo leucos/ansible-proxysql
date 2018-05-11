@@ -1,3 +1,4 @@
+---
 - name: Restart proxysql normal
   service:
     name: proxysql
@@ -18,4 +19,59 @@
     - Restart proxysql normal
     - Restart proxysql initial
 
+- name: Load config from file to memory
+  proxysql_manage_config:
+    action: LOAD
+    config_layer: CONFIG
+    config_settings: "{{ item }}"
+    direction: FROM
+    login_user: "{{ proxysql_admin_user }}"
+    login_password: "{{ proxysql_admin_password }}"
+    login_host: "{{ proxysql_admin_interface }}"
+    login_port: "{{ proxysql_admin_port }}"
+  with_items:
+    - "MYSQL USERS"
+    - "MYSQL SERVERS"
+    - "MYSQL QUERY RULES"
+    - "MYSQL VARIABLES"
+    - "ADMIN VARIABLES"
+    - "SCHEDULER"
+  notify:
+    - Copy config from memory to runtime
 
+- name: Copy config from memory to runtime
+  proxysql_manage_config:
+    action: LOAD
+    config_layer: RUNTIME
+    config_settings: "{{ item }}"
+    direction: TO
+    login_user: "{{ proxysql_admin_user }}"
+    login_password: "{{ proxysql_admin_password }}"
+    login_host: "{{ proxysql_admin_interface }}"
+    login_port: "{{ proxysql_admin_port }}"
+  with_items:
+    - "MYSQL USERS"
+    - "MYSQL SERVERS"
+    - "MYSQL QUERY RULES"
+    - "MYSQL VARIABLES"
+    - "ADMIN VARIABLES"
+    - "SCHEDULER"
+  notify: Save configs to disk
+
+- name: Save configs to disk
+  proxysql_manage_config:
+    action: SAVE
+    config_layer: DISK
+    config_settings: "{{ item }}"
+    direction: TO
+    login_user: "{{ proxysql_admin_user }}"
+    login_password: "{{ proxysql_admin_password }}"
+    login_host: "{{ proxysql_admin_interface }}"
+    login_port: "{{ proxysql_admin_port }}"
+  with_items:
+    - "MYSQL USERS"
+    - "MYSQL SERVERS"
+    - "MYSQL QUERY RULES"
+    - "MYSQL VARIABLES"
+    - "ADMIN VARIABLES"
+    - "SCHEDULER"

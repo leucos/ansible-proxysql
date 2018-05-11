@@ -1,30 +1,11 @@
-language: python
-python: '2.7'
+---
 sudo: required
-
-env:
-  - ROLE=$(echo $TRAVIS_REPO_SLUG | cut -f2 -d'/')
-
-virtualenv:
-  system_site_packages: true
-
-before_install: true
-
+language: python
+services:
+  - docker
+before_install:
+  - sudo apt-get -qq update
 install:
-  - sudo pip install ansible==2.3.0.0
-  - sudo pip install ansible-lint
-  - git clone --depth 1 https://github.com/nickjj/rolespec
-  - cd rolespec ; sudo make install; cd -
-  - sudo apt-get update && sudo apt-get install libstdc++6
-
+  - pip install -r requirements.txt
 script:
-  - ansible-lint .
-  - TRAVIS_REPO_SLUG= rolespec -i ~/testdir; ls -lR ~/testdir
-  - ln -s $TRAVIS_BUILD_DIR ~/testdir/roles/
-  - ln -s $TRAVIS_BUILD_DIR/tests/$ROLE ~/testdir/tests/
-  - cd ~/testdir; TRAVIS_REPO_SLUG= rolespec -r $ROLE
-
-notifications:
-  slack:
-    secure: f4s+CrjKmv58411G0QNkR5cro7MkzlIxAuujYovn/wA59LSvKNF/aK+wwrBya1IQZfH80CmcHZGKOKBVM7dDpnsEMkH5U/9Fu3NO1M8YqPcSQWSXvkEdvbkUgWoXbkUOWqxsbbe5SiBnbYDj40Z6zR5oWe/j79QmNb5Hj9UWDws=
-
+  - molecule test

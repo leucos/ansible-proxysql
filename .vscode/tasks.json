@@ -1,0 +1,39 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "verify",
+            "type": "shell",
+            "command": "molecule verify",
+            "group": {
+                "kind": "test",
+                "isDefault": true
+            }
+        },
+        {
+            "label": "converge",
+            "type": "shell",
+            "command": "molecule converge",
+            "group": {
+                "kind": "build"
+            },
+            "problemMatcher": []
+        },        {
+            "label": "destroy",
+            "type": "shell",
+            "command": "molecule destroy",
+            "group": {
+                "kind": "none"
+            }
+        },        {
+            "label": "create",
+            "type": "shell",
+            "command": "molecule create",
+            "group": {
+                "kind": "none"
+            }
+        }
+    ]
+}

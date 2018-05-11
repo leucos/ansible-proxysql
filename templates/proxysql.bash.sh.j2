@@ -1,0 +1,28 @@
+#!/bin/bash
+
+function px_exec() {
+  MYSQL_PWD={{ proxysql_admin_password }} mysql -P {{ proxysql_admin_port }} -h {{ proxysql_admin_interface }} -u {{ proxysql_admin_user }} -e "$*"
+}
+
+function px() {
+    case $1 in
+
+    "help")
+        echo "px <command>"
+        echo -e "\tchecksums: lists config checksums on host "
+        echo -e "\tstatus [active]: lists config checksums across cluster "
+        return
+        ;;
+
+    "checksums"|"ck")
+        px_exec 'SELECT * FROM runtime_checksums_values ORDER BY name;'
+        ;;
+
+    "status"|"st")
+        if [ "x$2" == "xactive" ]; then
+            px_exec "SELECT hostname, port, name, version, FROM_UNIXTIME(epoch) epoch, checksum, FROM_UNIXTIME(changed_at) changed_at, FROM_UNIXTIME(updated_at) updated_at, diff_check, DATETIME('NOW') FROM stats_proxysql_servers_checksums WHERE version > 0 ORDER BY hostname, name;"
+        else
+            px_exec "SELECT * FROM stats_proxysql_servers_checksums;"
+        fi
+    esac
+}

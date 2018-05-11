@@ -1,0 +1,25 @@
+---
+proxysql_admin_interface: 127.0.0.5
+proxysql_admin_port: 6030
+proxysql_admin_user: admin
+proxysql_admin_password: admin
+
+proxysql_mysql_interface: 127.0.0.1
+proxysql_mysql_port: 6039
+proxysql_mysql_server_version: 5.7.7
+proxysql_mysql_query_rules:
+  - match_pattern: '^SELECT .* FOR UPDATE$'
+    destination_hostgroup: 0
+  - match_pattern: '^SELECT'
+    destination_hostgroup: 1
+proxysql_mysql_servers:
+  - address: 127.0.0.1
+    port: 3306
+    hostgroup: 0
+  - address: 1.2.3.4
+    port: 3306
+    hostgroup: 1
+proxysql_mysql_users:
+  - username: foo
+    password: bar
+    default_hostgroup: 0

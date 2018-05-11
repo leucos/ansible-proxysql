@@ -1,0 +1,11 @@
+---
+- name: Prepare
+  hosts: all
+  gather_facts: false
+  tasks: []
+#    - name: Installs prereqs
+#    apt:
+#      pkg: "{{ item }}"
+#    with_items:
+#      - gnupg
+#      - iproute2
