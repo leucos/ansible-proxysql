@@ -43,6 +43,7 @@
   service:
     name: proxysql
     state: started
+    enabled: yes
 
 - name: Creates log dir
   file:
