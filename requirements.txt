@@ -1,4 +1,4 @@
-ansible==2.5.0
+ansible==2.6.18
 ansible-lint==3.4.21
 anyconfig==0.9.4
 arrow==0.12.1
