@@ -1,0 +1,4 @@
+- name: ProxySQL
+  hosts: localhost
+  roles:
+    - role: ansible-proxysql
