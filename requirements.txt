@@ -59,7 +59,7 @@ pytest==3.5.1
 python-dateutil==2.7.3
 python-gilt==1.2.1
 python-vagrant==0.5.15
-PyYAML==3.12
+PyYAML==5.1
 redis==2.10.6
 requests==2.20.0
 sh==1.12.14
