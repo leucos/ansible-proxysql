@@ -61,7 +61,7 @@ python-gilt==1.2.1
 python-vagrant==0.5.15
 PyYAML==3.12
 redis==2.10.6
-requests==2.18.4
+requests==2.20.0
 sh==1.12.14
 singledispatch==3.4.0.3
 six==1.11.0
