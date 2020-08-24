@@ -1,5 +1,7 @@
 # ProxySQL Ansible role
 
+## Project has moved to https://github.com/devops-works/ansible-proxysql
+
 [![Build Status](https://travis-ci.org/leucos/ansible-proxysql.svg?branch=master)](https://travis-ci.org/leucos/ansible-proxysql)
 
 This role will install proxysql on Ubuntu Xenial (16.04) & Bionic
